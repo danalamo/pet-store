@@ -7,18 +7,55 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <style>
-
+        html {
+            font-size: 10px;
+        }
+        .card {
+            border: 1px solid #cccccc;
+            padding: 1rem;
+            border-radius: 2px;
+            margin: .5rem;
+            width: 240px;
+            /* float: left; */
+            display: inline-block;
+        }
+        .card .name { 
+            display: inline-block;
+            float: left;
+        }
+        .card .price { 
+            display: inline-block;            
+            float: right;
+        }
+        .card img {
+            width: 100%;
+        }
+        .card .image {
+            min-height: 180px;
+            overflow: hidden;
+        }
+        .center {
+            margin: auto;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <section id="filters">
+    <section id="filters-container" class="center">
         <input type="search" placeholder="Search" />
         <select name="" id="">
             <option value="">Sort By</option>
         </select>
     </section>
 
-    <section id="products">
+    <section id="products-container" class="center">
+        <div class="product card">            
+            <div class="image">
+                <img src="//www.untamedscience.com/science/wp-content/uploads/2014/01/brown-bear.png" alt="" />
+            </div>
+            <span class="name">Ursidae</span>
+            <span class="price">99</span>
+        </div>
 
     </section>
 
