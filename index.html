@@ -11,12 +11,38 @@
     </style>
 </head>
 <body>
-    <section class="filters">
-        <div></div>
+    <section id="filters">
+        <input type="search" placeholder="Search" />
+        <select name="" id="">
+            <option value="">Sort By</option>
+        </select>
     </section>
 
-    <section class="products">
+    <section id="products">
+
     </section>
 
+    <script>
+        var store = {
+            name: "my sexy store",
+            products: [
+                {"name":"Ursidae",          "price":99.99,     "image":"web",  "tags":["big", "wild"],            "color":"blue"  },
+                {"name":"Canis Lupus",      "price":50,        "image":"web",  "tags":["medium", "tame"],         "color":"blue"  },
+                {"name":"Felis catus",      "price":87.65,     "image":"web",  "tags":["small", "tame"],          "color":"red"   },
+                {"name":"Loxodonta",        "price":9000,      "image":"web",  "tags":["big", "wild"],            "color":"red"   },
+                {"name":"Panthera Tigris",  "price":750.4567,  "image":"web",  "tags":["big", "wild"],            "color":"yellow"},
+                {"name":"Cetacea",          "price":10000,     "image":"web",  "tags":["big", "wild"],            "color":"yellow"},
+                {"name":"Aquila",           "price":550.5,     "image":"web",  "tags":["small", "wild", "tame"],  "color":"yellow"},
+                {"name":"Lacertilia",       "price":13.75,     "image":"web",  "tags":["small", "wild", "tame"],  "color":"green" }
+            ]
+        };
+
+        $(function(){
+            $.each(store.products, function(product) {
+                console.log(product);
+            })
+            //$('#products').
+        });
+    </script>
 </body>
 </html>
