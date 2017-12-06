@@ -7,9 +7,42 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         html {
-            font-size: 10px;
+            font-size: 16px;
+        }        
+        input, select {
+            padding: .5rem;
+            height: 2rem;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+            vertical-align: top;
+            background: none;
+            -webkit-appearance: none;
+            min-width: 100px;            
+        }
+        #filters-container {
+            padding: 1rem;
+        }
+        .icon-right {
+            padding-right: 2.5rem;
+        }
+        #filters-container i.fa {
+            position: relative;            
+            padding: 0.4rem;
+            width: 2rem;
+            height: 2rem;
+            vertical-align: bottom;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            left: -2.25rem;
+            z-index: -1;
         }
         .card {
             border: 1px solid #cccccc;
@@ -39,14 +72,17 @@
             margin: auto;
             text-align: center;
         }
+        
     </style>
 </head>
 <body>
     <section id="filters-container" class="center">
-        <input type="search" placeholder="Search" />
-        <select name="" id="">
+        <input name="search" type="text" placeholder="Search" class="icon-right" />
+        <i class="fa fa-search"></i>
+        <select name="sort" class="icon-right">
             <option value="">Sort By</option>
         </select>
+        <i class="fa fa-chevron-down"></i>
     </section>
 
     <section id="products-container" class="center">
@@ -54,8 +90,11 @@
             <div class="image">
                 <img src="//www.untamedscience.com/science/wp-content/uploads/2014/01/brown-bear.png" alt="" />
             </div>
-            <span class="name">Ursidae</span>
-            <span class="price">99</span>
+            <div class="details">
+                <span class="name">Ursidae</span>
+                <span class="price">99</span>
+                <input type="number" value="1" min="1" max="100" />
+            </div>
         </div>
 
     </section>
