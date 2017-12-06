@@ -80,7 +80,10 @@
         <input name="search" type="text" placeholder="Search" class="icon-right" />
         <i class="fa fa-search"></i>
         <select name="sort" class="icon-right">
-            <option value="">Sort By</option>
+            <option value="">Sort Ascending By</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="color">Color</option>
         </select>
         <i class="fa fa-chevron-down"></i>
     </section>
@@ -104,21 +107,73 @@
             name: "my sexy store",
             products: [
                 {"name":"Ursidae",          "price":99.99,     "tags":["big", "wild"],            "color":"blue",    "image":"//d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX1049419.jpg" },
-                {"name":"Canis Lupus",      "price":50,        "tags":["medium", "tame"],         "color":"blue",    "image":"//www.zooportraits.com/wp-content/uploads/2017/03/shutterstock_67337401.jpg" },
-                {"name":"Felis catus",      "price":87.65,     "tags":["small", "tame"],          "color":"red",     "image":"//www.zooportraits.com/wp-content/uploads/2017/05/shutterstock_273802403.jpg" },
+                {"name":"Canis Lupus",      "price":50,        "tags":["medium", "tame"],         "color":"blue",    "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
+                {"name":"Felis catus",      "price":87.65,     "tags":["small", "tame"],          "color":"red",     "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
                 {"name":"Loxodonta",        "price":9000,      "tags":["big", "wild"],            "color":"red",     "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Panthera Tigris",  "price":750.4567,  "tags":["big", "wild"],            "color":"yellow",  "image":"//www.zooportraits.com/wp-content/uploads/2017/03/shutterstock_67337401.jpg" },
-                {"name":"Cetacea",          "price":10000,     "tags":["big", "wild"],            "color":"yellow",  "image":"//www.zooportraits.com/wp-content/uploads/2017/03/shutterstock_67337401.jpg" },
-                {"name":"Aquila",           "price":550.5,     "tags":["small", "wild", "tame"],  "color":"yellow",  "image":"//www.zooportraits.com/wp-content/uploads/2017/03/shutterstock_67337401.jpg" },
-                {"name":"Lacertilia",       "price":13.75,     "tags":["small", "wild", "tame"],  "color":"green",   "image":"//www.zooportraits.com/wp-content/uploads/2017/03/shutterstock_67337401.jpg" }
-            ]
+                {"name":"Panthera Tigris",  "price":750.4567,  "tags":["big", "wild"],            "color":"yellow",  "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
+                {"name":"Cetacea",          "price":10000,     "tags":["big", "wild"],            "color":"yellow",  "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
+                {"name":"Aquila",           "price":550.5,     "tags":["small", "wild", "tame"],  "color":"yellow",  "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
+                {"name":"Lacertilia",       "price":13.75,     "tags":["small", "wild", "tame"],  "color":"green",   "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" }
+            ]            
         };
 
-        $(function(){
-            $.each(store.products, function(product) {
-                console.log(product);
-            })
-            //$('#products').
+        
+
+        $(function(){    
+            var $search = $('[name=search]');
+            var $sort = $('[name="sort"]');
+            var searchValue = '', sortValue = '';            
+            var $productsContainer = $('#products-container');            
+            renderProducts();
+            
+            $search.on('input', function(val) {
+                searchValue = $search.val().toLowerCase();                            
+                renderProducts();
+            });
+
+            $sort.on('change', function() {
+                sortValue = $sort.val();                
+                renderProducts();
+            });
+
+            function renderProducts() {
+                $productsContainer.html('');
+                var filteredProducts = store.products;
+                
+                if (searchValue != '') {
+                    filteredProducts = store.products.filter(function(product) { 
+                        var nameMatch = product.name.toLowerCase().indexOf(searchValue) != -1;
+                        var tagMatch = product.tags.some(function(tag) {
+                            return tag.toLowerCase().indexOf(searchValue) != -1;
+                        });
+                        
+                        return tagMatch || nameMatch;
+                    });    
+                }
+
+                if (sortValue != '') {
+                    filteredProducts = filteredProducts.sort(function(a, b) {
+                        return a[sortValue] > b[sortValue];
+                    });
+                }
+
+                $.each(filteredProducts, function(i, product) {            
+                    var $product = [
+                            '<div class="product card">',
+                                '<div class="image">',
+                                    '<img src="'+ product.image +'" alt="'+ product.name +' image" />',
+                                '</div>',
+                                '<div class="details">',
+                                    '<span class="name">'+ product.name +'</span>', 
+                                    '<span class="price">$'+ product.price.toFixed(2) +'</span>',
+                                    '<input type="number" value="1" min="1" max="100" />',
+                                '</div>',
+                            '</div>'
+                        ].join('');
+
+                    $productsContainer.append($product);
+                });
+            }                        
         });
     </script>
 </body>
