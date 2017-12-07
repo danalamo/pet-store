@@ -17,24 +17,62 @@
         html {
             font-size: 16px;
         }        
-        input, select {
-            padding: .5rem;
+        input, select, button {
+            padding: 0 .5rem 0 .5rem;
             height: 2rem;
             border-radius: 2px;
             border: 1px solid #ccc;
-            vertical-align: top;
-            background: none;
-            -webkit-appearance: none;
-            min-width: 100px;            
+            -webkit-appearance: none;    
+            vertical-align: baseline;          
+        }        
+        button {
+            height: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            padding: 0 .5rem 0 .5rem;
+            background: #ddd; 
         }
-        #filters-container {
+        button:hover {
+            background: #eee;
+            cursor: pointer;
+        }
+        .center {
+            margin: auto;
+            text-align: center;
+        }
+
+        #filters-container {                        
+            position: relative;
+            height: 60px;            
+        }
+        #products-container {
+            padding: 30px 0 30px 0;
+        }
+        #filter-toggler {
+            display: none;
+        }
+        .fixed-wrapper {
+            position: fixed;
+            border-bottom: 1px solid #ccc;
+            width: 100%;
             padding: 1rem;
+            z-index: 9;
+            background: white;
         }
-        .icon-right {
+        .filter {
+            display: inline-block;
+            margin-right: -2.2rem;
+        }
+        .filter .icon-right {            
             padding-right: 2.5rem;
+            background: none;
+            width: 200px;
         }
-        #filters-container i.fa {
-            position: relative;            
+        .filter:last-of-type {
+            margin-top: .5rem;
+        }
+        .filter i.fa {
+            position: relative; 
             padding: 0.4rem;
             width: 2rem;
             height: 2rem;
@@ -45,32 +83,91 @@
             z-index: -1;
         }
         .card {
-            border: 1px solid #cccccc;
-            padding: 1rem;
+            border: 1px solid #cccccc; 
             border-radius: 2px;
             margin: .5rem;
-            width: 240px;
-            /* float: left; */
+            width: 240px; 
             display: inline-block;
+            position: relative;
         }
         .card .name { 
             display: inline-block;
             float: left;
         }
         .card .price { 
-            display: inline-block;            
+            display: inline-block; 
             float: right;
+        }
+        .card .image {            
+            max-height: 150px;
+            margin-bottom: 30px;
+            overflow: hidden;
         }
         .card img {
             width: 100%;
         }
-        .card .image {
-            min-height: 180px;
-            overflow: hidden;
+        .card input {
+            width: 50px;
         }
-        .center {
-            margin: auto;
-            text-align: center;
+        .details {
+            transition: 1s ;
+            padding: .5rem;
+            position: absolute;
+            bottom: 0; 
+            height: 30px;
+            width: 100%;
+        }
+        .card:hover .details .add-to-cart {
+            display: block;
+        }
+        .card:hover .details {
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            padding: .5rem;
+            transition: .3s ;     
+            background: #fafafa; 
+        }
+        .details .add-to-cart {
+            display: none;
+            width: 100%;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            position: absolute;
+        }        
+        
+        @media screen and (max-width: 500px) {            
+            #filters-container {                
+                height: 60px;
+            }
+            .fixed-wrapper {
+                padding: .5rem 1rem;
+                min-height: 50px;
+            }
+            .filter {
+                display: none;
+            }
+            .filter.open {
+                display: block;
+            }
+            #filter-toggler {
+                margin-top: -2px;
+                display: block;
+                position: fixed;
+                cursor: pointer;
+                margin-bottom: .5rem;
+            }
+            #filter-toggler.open span {
+                display: none;   
+            }
+            #filter-toggler span {
+                float: right;
+                margin-left: 45px;
+                margin-top: 10px;
+            }
+        }
         }
         
     </style>
