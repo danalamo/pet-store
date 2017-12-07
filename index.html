@@ -7,7 +7,7 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    
+    <link rel="icon" type="image/gif" href="http://www.exit.al/en/wp-content/plugins/wpdiscuz/assets/img/loading.gif">
     <style>
         * {
             box-sizing: border-box;
@@ -25,6 +25,10 @@
             -webkit-appearance: none;    
             vertical-align: baseline;          
         }        
+        img {
+            background: #fff url(http://www.exit.al/en/wp-content/plugins/wpdiscuz/assets/img/loading.gif) no-repeat center;
+            background-size: 40px;
+        }
         button {
             height: 2rem;
             border: 1px solid #ccc;
@@ -35,6 +39,9 @@
         button:hover {
             background: #eee;
             cursor: pointer;
+        }
+        .container {
+            max-width: 1050px;
         }
         .center {
             margin: auto;
@@ -57,30 +64,32 @@
             width: 100%;
             padding: 1rem;
             z-index: 9;
-            background: white;
+            background: #eee;
+            box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
         }
         .filter {
-            display: inline-block;
-            margin-right: -2.2rem;
+            display: inline-block;            
         }
         .filter .icon-right {            
             padding-right: 2.5rem;
-            background: none;
+            background: white;         
             width: 200px;
         }
         .filter:last-of-type {
             margin-top: .5rem;
         }
         .filter i.fa {
+            pointer-events: none;
             position: relative; 
             padding: 0.4rem;
             width: 2rem;
             height: 2rem;
             vertical-align: bottom;
-            border: 1px solid #ccc;
+            border: 1px solid #aaa;
+            background: #ccc;
             border-radius: 2px;
-            left: -2.25rem;
-            z-index: -1;
+            margin-right: -2.25rem;
+            left: -2.25rem;            
         }
         .card {
             border: 1px solid #cccccc; 
@@ -88,6 +97,7 @@
             margin: .5rem;
             width: 240px; 
             display: inline-block;
+            vertical-align:top;
             position: relative;
         }
         .card .name { 
@@ -99,8 +109,7 @@
             float: right;
         }
         .card .image {            
-            max-height: 150px;
-            margin-bottom: 30px;
+            height: 175px;            
             overflow: hidden;
         }
         .card img {
@@ -113,6 +122,7 @@
             transition: 1s ;
             padding: .5rem;
             position: absolute;
+            background: #eee;
             bottom: 0; 
             height: 30px;
             width: 100%;
@@ -189,49 +199,49 @@
     </style>
 </head>
 <body>    
-    <section id="filters-container" class="center">        
+    <section id="filters-container">        
         <div class="fixed-wrapper">
-            <div id="filter-toggler">
-                <span>FILTERS</span>
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>                
-            </div>            
-            <div class="filter">
-                <input name="search" type="text" placeholder="Search" class="icon-right" />
-                <i class="fa fa-search"></i>
-            </div>
-            <div class="filter">
-                <select name="sort" class="icon-right">
-                    <option value="">Sort Ascending By</option>
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                    <option value="color">Color</option>
-                </select>
-                <i class="fa fa-chevron-down"></i>
+            <div class="container center">
+                <div id="filter-toggler">
+                    <span>FILTERS</span>
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>                
+                </div>            
+                <div class="filter">
+                    <input name="search" type="text" placeholder="Search" class="icon-right" />
+                    <i class="fa fa-search"></i>
+                </div>
+                <div class="filter">
+                    <select name="sort" class="icon-right">
+                        <option value="">Sort Ascending By</option>
+                        <option value="name">Name</option>
+                        <option value="price">Price</option>
+                        <option value="color">Color</option>
+                    </select>
+                    <i class="fa fa-chevron-down"></i>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="products-container" class="center"></section>
+    <section id="products-container" class="container center"></section>
 
     <script>
         var store = {
-            name: "my sexy store",
+            name: "exotic pet store",
             products: [
-                {"name":"Ursidae",          "price":99.99,     "tags":["big", "wild"],            "color":"blue",    "image":"//d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX1049419.jpg" },
-                {"name":"Canis Lupus",      "price":50,        "tags":["medium", "tame"],         "color":"blue",    "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Felis catus",      "price":87.65,     "tags":["small", "tame"],          "color":"red",     "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Loxodonta",        "price":9000,      "tags":["big", "wild"],            "color":"red",     "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Panthera Tigris",  "price":750.4567,  "tags":["big", "wild"],            "color":"yellow",  "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Cetacea",          "price":10000,     "tags":["big", "wild"],            "color":"yellow",  "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Aquila",           "price":550.5,     "tags":["small", "wild", "tame"],  "color":"yellow",  "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
-                {"name":"Lacertilia",       "price":13.75,     "tags":["small", "wild", "tame"],  "color":"green",   "image":"//upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" }
+                {"name":"Ursidae",          "price":99.99,     "tags":["big", "wild"],            "color":"blue",    "image":"http://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX1049419.jpg" },
+                {"name":"Canis Lupus",      "price":50,        "tags":["medium", "tame"],         "color":"blue",    "image":"http://previews.123rf.com/images/belizar/belizar1201/belizar120100075/12013462-gray-wolf-canis-lupus-in-winter-Stock-Photo.jpg" },
+                {"name":"Felis catus",      "price":87.65,     "tags":["small", "tame"],          "color":"red",     "image":"http://images.fineartamerica.com/images-medium-large/domestic-cat-felis-catus-three-grey-konrad-wothe.jpg" },
+                {"name":"Loxodonta",        "price":9000,      "tags":["big", "wild"],            "color":"red",     "image":"http://upload.wikimedia.org/wikipedia/commons/6/65/Loxodonta_africana_in_Serengeti.jpg" },
+                {"name":"Panthera Tigris",  "price":750.4567,  "tags":["big", "wild"],            "color":"yellow",  "image":"http://www.ryanphotographic.com/images/JPEGS/Panthera%20tigris%20Siberian%20Tiger%20Flehmen%20response.jpg" },
+                {"name":"Cetacea",          "price":10000,     "tags":["big", "wild"],            "color":"yellow",  "image":"http://s3.amazonaws.com/production.mediajoint.prx.org/public/piece_images/188687/orca_large.jpg" },
+                {"name":"Aquila",           "price":550.5,     "tags":["small", "wild", "tame"],  "color":"yellow",  "image":"http://mediaassets.kshb.com/photo/2017/04/07/147061603_1491594385958_57950126_ver1.0_640_480.jpg" },
+                {"name":"Lacertilia",       "price":13.75,     "tags":["small", "wild", "tame"],  "color":"green",   "image":"http://animals.sandiegozoo.org/sites/default/files/2017-07/animals-lizard-redheadedrockagama.jpg" }
             ]            
         };
-
-        
-
+    
         $(function(){    
             var $search = $('[name=search]');
             var $sort = $('[name="sort"]');
@@ -285,10 +295,10 @@
                                 '<div class="details">',                                    
                                     '<span class="name">'+ product.name +'</span>', 
                                     '<span class="price">$'+ toDecimal(product.price) +'</span>',                                    
-                                    '<div class="add-to-cart">',
-                                        'QTY <input type="number" value="1" min="1" max="100" />',
-                                        '<button>Add to Cart</button>',
-                                    '</div>',
+                                    '<form class="add-to-cart">',
+                                        'QTY <input type="number" value="1" min="1" max="15" required />',
+                                        '<button style="margin-left:-1px;">Add to Cart</button>',
+                                    '</form>',
                                 '</div>',
                             '</div>'
                         ].join('');
